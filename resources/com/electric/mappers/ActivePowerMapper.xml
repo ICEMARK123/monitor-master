@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.electric.mappers.ActivePowerMapper">
+    <select id="showAllRealTimeDataList" resultType="com.electric.beans.RealTimeData" parameterType="java.lang.String">
+        select sampletime,Pa,Pb,Pc,Pt from realTimeData where machineNo = #{machineNo}
+         order by sampleTime desc
+    </select>
+    <select id="getRealTimeDataByTimeSpace" parameterType="java.lang.String" resultType="com.electric.beans.RealTimeData">
+        SELECT Pa,Pb,Pc,Pt,sampleTime FROM realTimeData
+        WHERE sampleTime BETWEEN #{starttime} AND #{endtime} AND machineNo = #{machineNo}
+        order by sampleTime ASC
+    </select>
+    <select id="getRealTimeDataByTimeSpaceDESC" parameterType="java.lang.String" resultType="com.electric.beans.RealTimeData">
+        SELECT Pa,Pb,Pc,Pt,sampleTime FROM realTimeData
+        WHERE sampleTime BETWEEN #{starttime} AND #{endtime} AND machineNo = #{machineNo}
+        order by sampleTime DESC
+    </select>
+</mapper>

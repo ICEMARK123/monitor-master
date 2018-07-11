@@ -1,0 +1,54 @@
+
+
+.dropbtn {
+    margin-top:7%;
+    padding: 16px;
+    font-size: 14px;
+    border: none;
+    height:8%;
+    text-align: center;
+    line-height: 8%;
+    cursor: pointer;
+}
+.dropbtn:hover{
+    background-color: #BED2ED;
+}
+
+/* 容器 <div> - 需要定位下拉内容 */
+.dropdown {
+    margin-left:-5px;
+    position: relative;
+    display: inline-block;
+}
+
+/* 下拉内容 (默认隐藏) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+/* 下拉菜单的链接 */
+.dropdown-content a {
+    color: black;
+    padding: 10px 12px;
+    text-decoration: none;
+    display: block;
+}
+
+/* 鼠标移上去后修改下拉菜单链接颜色 */
+.dropdown-content a:hover {background-color: #BED2ED}
+
+/* 在鼠标移上去后显示下拉菜单 */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.showanother{
+    position: relative;
+    display: inline-block;
+}
+
+
+

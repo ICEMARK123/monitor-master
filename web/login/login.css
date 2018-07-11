@@ -1,0 +1,46 @@
+/*
+css file
+create by cherry
+time:2017/8/15
+function:deal the login page
+*/
+img{
+    margin-left:30%;
+    width:70%;
+    height:70%;
+}
+
+/*通过设置浮动是原本占一行的div可以多个在一行上*/
+.div_left{
+
+    margin-top:5%;
+    display: inline;
+    width:50%;
+    float: left;
+}
+.div_right{
+    display: inline;
+    margin-top:5%;
+    margin-right:20%;
+    width:25%;
+    height:70%;
+    float:right;
+    border:1px solid gray;
+}
+.div_inner{
+    margin-top: 10%;
+    margin-left:10%;
+}
+label{
+    width:15%;
+    align-content: center;
+}
+.buttonlogin{
+    background-color: red;
+    align-content: center;
+    margin-left:30%;
+    width:30%;
+    height:10%;
+}
+
+

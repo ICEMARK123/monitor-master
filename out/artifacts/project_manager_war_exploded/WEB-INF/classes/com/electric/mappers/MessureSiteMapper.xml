@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.electric.mappers.MessureSiteMapper">
+    <select id="getAllDevTypeList" resultType="com.electric.beans.DevTypeInfo">
+        SELECT * FROM devTypeInfo
+    </select>
+    <sql id="getPk">
+        select ISNull(max(${pk}),0)+1 from ${tb}
+    </sql>
+    <insert id="addDevType" parameterType="com.electric.beans.DevTypeInfo">
+        <selectKey keyProperty="type_id" order="BEFORE" resultType="int">
+            <include refid="getPk">
+                <property name="pk" value="type_id"></property>
+                <property name="tb" value="devTypeInfo"></property>
+            </include>
+        </selectKey>
+        insert into devTypeInfo values(#{type_id},#{type_name},#{isused},#{dev_selfName})
+    </insert>
+    <delete id="delDevType" parameterType="int">
+        delete from devTypeInfo where type_id=#{devTypeid}
+    </delete>
+    <update id="updateType" parameterType="com.electric.beans.DevTypeInfo">
+        update devTypeInfo
+        SET type_name = #{type_name},
+        IsUsed = #{isused},
+        dev_selfName = #{dev_selfName}
+        WHERE type_id = #{type_id}
+    </update>
+    <select id="getDevTypeByName" parameterType="java.lang.String" resultType="com.electric.beans.DevTypeInfo">
+          SELECT * from devTypeInfo
+          where lower(type_name) like #{typename};
+    </select>
+    <select id="getDevTypeInfoByName" parameterType="java.lang.String" resultType="com.electric.beans.DevTypeInfo">
+        select * from devTypeInfo where lower(type_name) = #{typename}
+    </select>
+    <resultMap id="deviceledger" type="com.electric.beans.MesureSiteInfo">
+        <id column="machineNo" property="machineNo"/>
+        <result column="lineWay" property="lineWay"/>
+        <result column="location" property="location"/>
+        <result column="dev_descript" property="devDescript"/>
+        <result column="dev_code" property="devCode"/>
+        <result column="phonenumber" property="phonenumber"/>
+        <result column="saveTime" property="saveTime"/>
+        <association property="devTypeInfo" javaType="com.electric.beans.DevTypeInfo">
+            <id column="type_id" property="type_id"/>
+            <id column="type_name" property="type_name"/>
+        </association>
+    </resultMap>
+    <select id="getAllDeviceLedgerList" resultMap="deviceledger">
+        select lineway,location,dev_descript,dev_code,machineNo,phonenumber,savetime,
+        type_name from MesureSiteInfo
+        inner join devTypeInfo
+        on devTypeInfo.type_id =  MesureSiteInfo.type_id;
+    </select>
+    <select id="getAllDevTypeName" resultType="java.lang.String">
+        select distinct type_name from devTypeInfo
+    </select>
+    <select id="getIdByName" parameterType="java.lang.String" resultType="int">
+        select type_id from devTypeInfo where type_name = #{typename}
+    </select>
+    <update id="modifyMessure" parameterType="com.electric.beans.MesureSiteInfo">
+        update MesureSiteInfo
+        <set>
+            <if test="lineWay !='' and lineWay !=null">
+                lineWay = #{lineWay},
+            </if>
+            <if test="location !='' and location !=null">
+                location = #{location},
+            </if>
+            <if test="devDescript !='' and devDescript !=null">
+                dev_descript = #{devDescript},
+            </if>
+            <if test="devCode !='' and devCode !=null">
+                dev_code = #{devCode},
+            </if>
+            <if test="typeId !='' and typeId !=null">
+                type_id = #{typeId},
+            </if>
+            <if test="phonenumber !='' and phonenumber !=null">
+                phonenumber = #{phonenumber},
+            </if>
+            <if test="machineNo !='' and machineNo !=null">
+                machineNo = #{machineNo}
+            </if>
+            WHERE machineNo = #{machineNo}
+        </set>
+    </update>
+    <select id="getMessureSiteFromNo" parameterType="java.lang.String" resultType="com.electric.beans.MesureSiteInfo">
+        SELECT * FROM MesureSiteInfo WHERE machineNo = #{machineNo}
+    </select>
+    <insert id="addDevLedger" parameterType="com.electric.beans.MesureSiteInfo">
+        INSERT INTO MesureSiteInfo(lineWay, location, dev_descript, dev_code,type_id, machineNo, phonenumber, savetime, onlineSituation)
+        VALUES (#{lineWay},#{location},#{devDescript},#{devCode},#{typeId},#{machineNo},#{phonenumber},#{saveTime},#{onlineSituation})
+    </insert>
+    <select id="getDevLedgerByLocation" parameterType="java.lang.String" resultMap="deviceledger">
+        select lineway,location,dev_descript,dev_code,machineNo,phonenumber,savetime,
+        type_name from MesureSiteInfo
+        inner join devTypeInfo
+        on devTypeInfo.type_id =  MesureSiteInfo.type_id
+        WHERE location LIKE #{location}
+    </select>
+</mapper>

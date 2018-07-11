@@ -1,0 +1,14 @@
+.div_table_info{
+    float:left;
+    width:90%;
+    height:100%;
+}
+#table_bodyInfo{
+    font-size:14px;
+}
+.div_select_choose{
+    width:9.5%;
+    float:right;
+    border:1px solid darkgray;
+    height:100%;
+}

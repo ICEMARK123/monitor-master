@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.electric.mappers.UserAddMapper">
+    <select id="getUserByAccount" resultType="com.electric.beans.UserInfo">
+        select * from userInfo where userId=#{user_account};
+    </select>
+    <insert id="addUserInfo" parameterType="java.util.HashMap">
+        insert into userInfo(userId,userName,passwd,isRootUser)
+         values (#{user_account},#{user_name},#{user_passwd},#{user_ident});
+    </insert>
+    <select id="getUserByName" resultType="com.electric.beans.UserInfo">
+        select * from userInfo where lower(userName) = lower(#{user_name});
+    </select>
+    <select id="getAllUser" resultType="com.electric.beans.UserInfo">
+        select * from userInfo;
+    </select>
+    <delete id="deleteUser" parameterType="java.lang.String">
+        delete from userInfo where userId = #{userId}
+    </delete>
+    <update id="modifyUser" parameterType="com.electric.beans.UserInfo">
+        update userInfo set
+        userName = #{userName},
+        passwd = #{passwd},
+        isRootUser = #{isRootUser}
+        where userId = #{userId}
+    </update>
+</mapper>

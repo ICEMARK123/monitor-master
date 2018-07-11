@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.electric.mappers.VreferInfoMapper">
+    <select id="getRealTimeByTimespace" parameterType="java.lang.String" resultType="com.electric.beans.RealTimeData">
+        SELECT Ua,Ub,Uc,sampleTime FROM realTimeData
+        WHERE sampleTime BETWEEN #{starttime} AND #{endtime} AND machineNo = #{machineno}
+        order by sampleTime desc
+    </select>
+    <select id="getRealTimesapceASC" parameterType="java.lang.String" resultType="com.electric.beans.RealTimeData">
+        SELECT Ua,Ub,Uc,sampleTime FROM realTimeData
+        WHERE sampleTime BETWEEN #{starttime} AND #{endtime} AND machineNo = #{machineno}
+        order by sampleTime ASC
+    </select>
+    <select id="getAllRealTimeData" parameterType="java.lang.String" resultType="com.electric.beans.RealTimeData">
+        select Ua,Ub,Uc,sampleTime from realTimeData where machineNo =#{machineNo} order by sampleTime desc
+    </select>
+</mapper>

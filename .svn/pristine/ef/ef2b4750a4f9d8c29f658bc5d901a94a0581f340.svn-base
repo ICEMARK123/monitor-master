@@ -1,0 +1,9 @@
+$(function () {
+    alert("test");
+    $("#sureTime").click(function () {
+        var starttime = $("#startTime").val();  //2017-12-15T12:12
+        var endtime = $("#endTime").val();
+        alert(starttime);
+        alert(endtime);
+    })
+});

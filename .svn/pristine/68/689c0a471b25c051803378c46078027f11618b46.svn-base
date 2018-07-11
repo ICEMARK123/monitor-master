@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.electric.mappers.MessureSiteMapper">
+    <select id="getAllDevTypeList" resultType="com.electric.beans.DevTypeInfo">
+        select * from devTypeInfo
+    </select>
+    <sql id="getPk">
+        select ISNull(max(${pk}),0)+1 from ${tb}
+    </sql>
+    <insert id="addDevType" parameterType="com.electric.beans.DevTypeInfo">
+    <selectKey keyProperty="type_id" order="BEFORE" resultType="int">
+        <include refid="getPk">
+            <property name="pk" value="type_id"></property>
+            <property name="tb" value="devTypeInfo"></property>
+        </include>
+    </selectKey>
+    insert into devTypeInfo values(#{type_id},#{type_name},#{isUsed},#{dev_selfName})
+</insert>
+    <delete id="delDevType" parameterType="int">
+        delete from devTypeInfo where type_id=#{devTypeid}
+    </delete>
+    <update id="updateType" parameterType="com.electric.beans.DevTypeInfo">
+        update devTypeInfo
+        SET type_name = #{type_name},
+        IsUsed = #{isUsed},
+        dev_selfName = #{dev_selfName}
+        WHERE type_id = #{type_id}
+    </update>
+    <select id="getDevTypeByName" parameterType="java.lang.String" resultType="com.electric.beans.DevTypeInfo">
+          select * from devTypeInfo
+          where lower(type_name) like #{typename};
+    </select>
+</mapper>

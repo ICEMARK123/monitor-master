@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.electric.mappers.MainPageMapper">
+    <resultMap id="messureInfo" type="com.electric.beans.MesureSiteInfo">
+        <id column="machineNo" property="machineNo"/>
+        <result column="lineWay" property="lineWay"/>
+        <result column="location" property="location"/>
+        <result column="dev_descript" property="devDescript"/>
+        <result column="dev_code" property="devCode"/>
+        <result column="onlineSituation" property="onlineSituation"/>
+        <result column="lastCommTime" property="lastCommTime"/>
+        <association property="devTypeInfo" javaType="com.electric.beans.DevTypeInfo">
+            <id column="type_id" property="type_id"/>
+            <result column="type_name" property="type_name"/>
+        </association>
+    </resultMap>
+    <select id="getAllMessureList" resultMap="messureInfo">
+          select MesureSiteInfo.lineWay,MesureSiteInfo.location,MesureSiteInfo.dev_code,MesureSiteInfo.dev_descript,MesureSiteInfo.machineNo,onlineSituation,lastCommTime,type_name
+          from MesureSiteInfo inner join devTypeInfo on devTypeInfo.type_id = MesureSiteInfo.type_id
+    </select>
+</mapper>

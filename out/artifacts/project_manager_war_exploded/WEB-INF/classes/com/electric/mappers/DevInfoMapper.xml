@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.electric.mappers.DevInfoMapper">
+    <select id="getDevInfoList" resultType="com.electric.beans.DevInfo" parameterType="java.lang.String">
+        select dev_id,machineNo,use_company,install_location,soft_version,hard_version,production_date
+        from devInfo where machineNo = #{machienNo}
+    </select>
+    <select id="getComList" resultType="com.electric.beans.ComRefer" parameterType="java.lang.String">
+        select * from comrefer WHERE machineNo = #{machineNo}
+    </select>
+    <delete id="deleteComRefer" parameterType="java.lang.String">
+        delete from comrefer where dev_ip = #{devIp}
+    </delete>
+    <!--<select id="getMachineNoList" resultType="java.lang.String">-->
+
+    <!--</select>-->
+    <delete id="delteDevInfo" parameterType="java.lang.String">
+        delete from devInfo where dev_id = #{devId}
+    </delete>
+    <select id="getProduceDateFromDevId" parameterType="java.lang.String" resultType="java.lang.String">
+        select production_date from devInfo where dev_id = #{devId}
+    </select>
+    <update id="modifyDevInfo" parameterType="com.electric.beans.DevInfo">
+        UPDATE  devInfo
+        <set>
+            <if test="use_company!=''and use_company!=null">
+                use_company = #{use_company},
+            </if>
+            <if test="install_location!='' and install_location!=null">
+                install_location = #{install_location},
+            </if>
+            <if test="soft_version!='' and soft_version!=null">
+                soft_version = #{soft_version},
+            </if>
+            <if test="hard_version!='' and hard_version!=null">
+                hard_version = #{hard_version},
+            </if>
+            <if test="production_date!='' and production_date!=null">
+                production_date = #{production_date}
+            </if>
+        </set>
+        WHERE dev_id = #{dev_id}
+    </update>
+    <sql id="getPk">
+        select ISNull(max(${pk}),0)+1 from ${tb}
+    </sql>
+    <insert id="addDevInfo" parameterType="com.electric.beans.DevInfo">
+        <selectKey keyProperty="dev_id" order="BEFORE" resultType="int">
+            <include refid="getPk">
+                <property name="pk" value="dev_id"></property>
+                <property name="tb" value="devInfo"></property>
+            </include>
+        </selectKey>
+        insert into devInfo values(#{dev_id},#{machineNo},#{use_company},#{install_location},#{soft_version},#{hard_version},#{production_date})
+    </insert>
+    <update id="modifyComRefer" parameterType="com.electric.beans.ComRefer">
+        update comrefer
+        <set>
+            <if test="main_ipAddr!='' and main_ipAddr!=null">
+                main_ipAddr = #{main_ipAddr},
+            </if>
+            <if test="main_port!='' and main_port!=null">
+                main_port = #{main_port},
+            </if>
+            <if test="dev_commPort!='' and dev_commPort!=null">
+                dev_commPort = #{dev_commPort},
+            </if>
+            <if test="apn!='' and apn!=null">
+                apn = #{apn},
+            </if>
+            <if test="heartrate!=null and heartrate!=''">
+                heartrate = #{heartrate},
+            </if>
+            <if test="sim_number!='' and sim_number!=null">
+                sim_number =#{sim_number},
+            </if>
+            <if test="dev_ip!='' and dev_ip!=null">
+                dev_ip = #{dev_ip}
+            </if>
+
+        </set>
+        WHERE dev_ip = #{dev_ip}
+    </update>
+    <insert id="addComRefer" parameterType="com.electric.beans.ComRefer">
+        insert into comrefer
+        values(#{main_ipAddr},#{main_port},#{dev_ip},#{machineNo},#{dev_commPort},#{apn},#{sim_number})
+    </insert>
+    <select id="getDevInfoByDevId" parameterType="int" resultType="com.electric.beans.DevInfo">
+        select * from devInfo where dev_id = #{devId}
+    </select>
+    <select id="getComReferByDevIp" parameterType="java.lang.String" resultType="com.electric.beans.ComRefer">
+        select * from comrefer where dev_ip = #{devIp}
+    </select>
+</mapper>
