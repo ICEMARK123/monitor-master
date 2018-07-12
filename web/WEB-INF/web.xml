@@ -10,6 +10,8 @@
     </context-param>
     <!--设置起始页  注意路径的根目录是在web下的-->
     <welcome-file-list>
+	<!--添加起始页为登录页面-->
+	
         <welcome-file>login/login.jsp</welcome-file>
     </welcome-file-list>
     <!--字符集过滤-->

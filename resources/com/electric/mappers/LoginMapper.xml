@@ -3,9 +3,12 @@
                 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.electric.mappers.LoginMapper">
+<!--查询用户-->
 <select id="getUserFromId" resultType="com.electric.beans.UserInfo" >
     select * from userInfo where userId=#{userId};
 </select>
+
+<!--更新用户最后登录时间-->
 <update id="updateLastLoginTime" parameterType="java.lang.String">
     update userInfo
     set lastLoginTime=#{nowTime} where userId=#{userId}
