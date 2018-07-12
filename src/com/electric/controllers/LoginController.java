@@ -18,13 +18,19 @@ package com.electric.controllers;
 
 /**
  * Created by ICEMARK on 2017/11/14.
+ 登录功能的控制器
  */
 @Controller
 @RequestMapping(value = "/login")
 public class LoginController {
+	/*
+	* 登录服务
+	*/
     @Resource(name="loginService")
     private LoginService loginService;
-    @RequestMapping("/check")  //检查验证码是否正确
+	
+	//检查验证码是否正确
+    @RequestMapping("/check")  
     public void check(HttpServletRequest request, HttpServletResponse response) throws IOException {
         System.out.println("检查验证码书否输入正确！");
         String securityCode = request.getParameter("vercode");
@@ -40,7 +46,8 @@ public class LoginController {
         }
         response.getWriter().print(json.toJSONString());
     }
-    @RequestMapping("/checkAccount") //验证登录信息
+	//验证登录信息
+    @RequestMapping("/checkAccount") 
     public void checkAccount(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");

@@ -18,3 +18,9 @@ Power oriented monitoring system
 3. 使用PowerDesginer对数据库设计
 4. 安装配置Redis
 5. 安装SQLServer
+
+# 功能完成
+### 登录功能
+1. 设置一个管理员用户
+2. 设定普通用户和管理员用户的登录
+3. 完成验证码的校验功能

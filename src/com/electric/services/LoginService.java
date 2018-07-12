@@ -16,10 +16,12 @@ public class LoginService {
     @Resource(name="loginMapper")
     private LoginMapper loginMapper;
 
+	//通过ID获取用户
     public UserInfo getUserFromId(String userId){
         System.out.println("进入LoginService中的getUserFromId方法中！");
         return loginMapper.getUserFromId(userId);
     }
+	//通过ID 获取用户最后登录时间
     public boolean updateLastLoginTime(String nowTime,String userId){
         return loginMapper.updateLastLoginTime(nowTime,userId)>0;
     }
