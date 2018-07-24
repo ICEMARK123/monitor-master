@@ -2,6 +2,7 @@ package com.electric.beans;
 
 /**
  * Created by cherry on 2017/12/16.
+ * 实时数据
  */
 public class RealTimeData {
     private String machineNo;
