@@ -22,10 +22,12 @@ import java.util.List;
 
 /**
  * Created by cherry on 2018/1/1.
+ * 电压信息控制器
  */
 @Controller
 @RequestMapping("/activePower")
 public class ActivePowerController {
+	// 获取信息
     @Autowired
     @Resource(name = "activePowerService")
     private ActivePowerService activePowerService;
@@ -83,6 +85,7 @@ public class ActivePowerController {
         jsonObject.put("machineNo",machineNo);
         response.getWriter().print(jsonObject.toJSONString());
     }
+	//图形界面信息
     @RequestMapping("/tableShowByTimeSpace")
     public void tableShowByTimeSpace(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
         System.out.println("进入显示a相有功功率的图形显示");

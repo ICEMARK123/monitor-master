@@ -1,3 +1,5 @@
+<%--电流页面的表结构--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="../../inc/referDatatemplate.jsp"%>
 <title>电流详情</title>

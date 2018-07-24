@@ -4,6 +4,7 @@
   Date: 2018/1/2
   Time: 15:56
   To change this template use File | Settings | File Templates.
+  频率的表结构
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="../../inc/referDatatemplate.jsp"%>
